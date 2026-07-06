@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FlowForge AI builds custom automation for businesses that have outgrown manual processes. We map what you actually do, build what you actually need, and stay until it works." />
+  <title>FlowForge AI — Custom AI Workflows for Business</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/sections.css" />
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo" aria-label="FlowForge AI — home">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+          <rect width="30" height="30" rx="8" fill="url(#logo-g)" />
+          <path d="M7 15h4.5l2-5 3 10 2.5-5H26" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+          <defs>
+            <linearGradient id="logo-g" x1="0" y1="0" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1"/>
+              <stop offset="1" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>FlowForge AI</span>
+      </a>
+
+      <nav class="nav__links" aria-label="Main navigation">
+        <a href="#services" class="nav__link">Services</a>
+        <a href="#process" class="nav__link">Process</a>
+        <a href="#results" class="nav__link">Results</a>
+        <a href="#faq" class="nav__link">FAQ</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a href="#contact" class="btn btn--primary">Book Free Call</a>
+      </div>
+
+      <button class="nav__toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="nav__mobile" id="mobile-menu" aria-hidden="true">
+      <a href="#services" class="nav__mobile-link">Services</a>
+      <a href="#process" class="nav__mobile-link">Process</a>
+      <a href="#results" class="nav__mobile-link">Results</a>
+      <a href="#faq" class="nav__mobile-link">FAQ</a>
+      <a href="#contact" class="btn btn--primary">Book Free Call</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="orb orb--1"></div>
+        <div class="orb orb--2"></div>
+        <div class="orb orb--3"></div>
+        <div class="hero__grid"></div>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <div class="badge reveal">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <circle cx="7" cy="7" r="2.5" fill="#6366f1"/>
+              <circle cx="7" cy="7" r="5.5" stroke="#6366f1" stroke-width="1.5" opacity="0.35"/>
+            </svg>
+            Built for ops teams, not developers
+          </div>
+
+          <h1 class="hero__heading reveal reveal-delay-1" id="hero-heading">
+            Stop doing the work<br />
+            <span class="hero__heading-accent">AI</span> can do for you
+          </h1>
+
+          <p class="hero__sub reveal reveal-delay-2">
+            FlowForge AI builds custom automation for businesses that have outgrown manual processes — connected to the tools you already use, shaped around how you actually work, and live within weeks.
+          </p>
+
+          <div class="hero__cta reveal reveal-delay-3">
+            <a href="#contact" class="btn btn--primary btn--lg">
+              Book Free Consultation
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="#process" class="btn btn--ghost btn--lg">See How It Works</a>
+          </div>
+
+          <div class="hero__stats reveal reveal-delay-4">
+            <div class="stat">
+              <span class="stat__num">~12 hrs</span>
+              <span class="stat__label">saved per person/week</span>
+            </div>
+            <div class="stat__divider" aria-hidden="true"></div>
+            <div class="stat">
+              <span class="stat__num">3 wks</span>
+              <span class="stat__label">avg. time to first workflow live</span>
+            </div>
+            <div class="stat__divider" aria-hidden="true"></div>
+            <div class="stat">
+              <span class="stat__num">200+</span>
+              <span class="stat__label">workflows in production</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal reveal-delay-2" aria-hidden="true">
+          <div class="workflow-card" id="workflow-demo">
+            <div class="workflow-card__header">
+              <div class="wc-dot"></div>
+              <span class="wc-title">Invoice Processing</span>
+              <span class="wc-badge">Live</span>
+            </div>
+
+            <div class="workflow-steps">
+
+              <div class="workflow-step ws--pending">
+                <div class="ws-icon">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                    <rect x="2" y="1" width="11" height="13" rx="2" stroke="#a5b4fc" stroke-width="1.4"/>
+                    <path d="M5 5.5h5M5 8.5h3.5" stroke="#a5b4fc" stroke-width="1.3" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="ws-info">
+                  <span class="ws-name">Email received</span>
+                  <span class="ws-time">Queued</span>
+                </div>
+                <svg class="ws-check" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="7" fill="#10b981" fill-opacity="0.15"/>
+                  <path d="M5 8l2.2 2.2L11 5.5" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="ws-spinner" aria-hidden="true"></div>
+              </div>
+
+              <div class="ws-connector"></div>
+
+              <div class="workflow-step ws--pending">
+                <div class="ws-icon">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                    <rect x="1" y="3" width="13" height="9" rx="2" stroke="#a5b4fc" stroke-width="1.4"/>
+                    <circle cx="7.5" cy="7.5" r="1.5" fill="#a5b4fc" fill-opacity="0.6"/>
+                    <path d="M4 7.5h1.5M10.5 7.5H12" stroke="#a5b4fc" stroke-width="1.2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="ws-info">
+                  <span class="ws-name">AI extracts data</span>
+                  <span class="ws-time">Queued</span>
+                </div>
+                <svg class="ws-check" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="7" fill="#10b981" fill-opacity="0.15"/>
+                  <path d="M5 8l2.2 2.2L11 5.5" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="ws-spinner" aria-hidden="true"></div>
+              </div>
+
+              <div class="ws-connector"></div>
+
+              <div class="workflow-step ws--pending">
+                <div class="ws-icon">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                    <circle cx="7.5" cy="7.5" r="5.5" stroke="#a5b4fc" stroke-width="1.4"/>
+                    <path d="M7.5 4v3.5l2 2" stroke="#a5b4fc" stroke-width="1.4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="ws-info">
+                  <span class="ws-name">Updates CRM</span>
+                  <span class="ws-time">Queued</span>
+                </div>
+                <svg class="ws-check" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="7" fill="#10b981" fill-opacity="0.15"/>
+                  <path d="M5 8l2.2 2.2L11 5.5" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="ws-spinner" aria-hidden="true"></div>
+              </div>
+
+              <div class="ws-connector"></div>
+
+              <div class="workflow-step ws--pending">
+                <div class="ws-icon">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                    <rect x="1" y="3" width="13" height="9" rx="2" stroke="#a5b4fc" stroke-width="1.4"/>
+                    <path d="M1 6l6.5 4L14 6" stroke="#a5b4fc" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="ws-info">
+                  <span class="ws-name">Sends confirmation</span>
+                  <span class="ws-time">Queued</span>
+                </div>
+                <svg class="ws-check" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <circle cx="8" cy="8" r="7" fill="#10b981" fill-opacity="0.15"/>
+                  <path d="M5 8l2.2 2.2L11 5.5" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="ws-spinner" aria-hidden="true"></div>
+              </div>
+
+            </div>
+
+            <div class="workflow-card__footer">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <circle cx="7" cy="7" r="6" stroke="#10b981" stroke-width="1.4"/>
+                <path d="M4 7.5l2 2L10 5" stroke="#10b981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Saved 4.2 hours today</span>
+            </div>
+          </div>
+
+          <div class="hero__mini-stats">
+            <div class="mini-stat">
+              <span class="mini-stat__num">↓ 90%</span>
+              <span class="mini-stat__label">Fewer data errors</span>
+            </div>
+            <div class="mini-stat">
+              <span class="mini-stat__num">4–6 wk</span>
+              <span class="mini-stat__label">Typical payback period</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LOGOS ===== -->
+    <section class="logos-section" aria-label="Trusted by businesses worldwide">
+      <div class="container logos-inner">
+        <p class="logos-label">In production at</p>
+        <div class="logos-strip" aria-hidden="true">
+          <span class="logo-mark">Meridian</span>
+          <span class="logo-mark">Arklow&nbsp;Health</span>
+          <span class="logo-mark">Nexus&nbsp;Labs</span>
+          <span class="logo-mark">Crestline</span>
+          <span class="logo-mark">TechFlow</span>
+          <span class="logo-mark">Orbis</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROBLEM ===== -->
+    <section class="problem-section section" id="problem" aria-labelledby="problem-heading">
+      <div class="container">
+        <div class="section-header center reveal">
+          <span class="section-label">The Problem</span>
+          <h2 class="section-heading" id="problem-heading">
+            Your best people are spending<br />
+            <span class="gradient-text">half their day on copy-paste</span>
+          </h2>
+          <p class="section-sub">Most businesses lose 10–15 hours per employee per week to tasks that don't require human judgment. They just haven't built the automation yet.</p>
+        </div>
+
+        <div class="problem-grid">
+          <div class="problem-card reveal reveal-delay-1">
+            <div class="problem-card__icon problem-card__icon--red">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <circle cx="11" cy="11" r="9" stroke="#f87171" stroke-width="1.8"/>
+                <path d="M11 7v5M11 15v.5" stroke="#f87171" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="problem-card__title">Repetitive work crowds out real work</h3>
+            <p class="problem-card__text">Someone on your team is copying data between two apps right now. It takes 20 minutes, happens a dozen times a day, and every single occurrence is preventable.</p>
+          </div>
+
+          <div class="problem-card reveal reveal-delay-2">
+            <div class="problem-card__icon problem-card__icon--orange">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <path d="M3 11h16M3 6h16M3 16h11" stroke="#fb923c" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="problem-card__title">Manual steps introduce errors</h3>
+            <p class="problem-card__text">A number transposed from an email. An invoice sent twice. A status that never got updated. Small mistakes, but they compound — and most happen because a human had to do something a computer should.</p>
+          </div>
+
+          <div class="problem-card reveal reveal-delay-3">
+            <div class="problem-card__icon problem-card__icon--violet">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+                <path d="M11 3v16M3 11h16" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="11" cy="11" r="4" stroke="#a78bfa" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <h3 class="problem-card__title">Everything waits on one person</h3>
+            <p class="problem-card__text">The approval that needs three sign-offs. The report only Janet knows how to run. The onboarding checklist done from scratch every time. These aren't edge cases — they're your operation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services-section section" id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-header center reveal">
+          <span class="section-label">Services</span>
+          <h2 class="section-heading" id="services-heading">
+            What we build, and<br />
+            <span class="gradient-text">why it actually holds up</span>
+          </h2>
+          <p class="section-sub">We map what you actually do, build what you actually need, and stay until it works. No off-the-shelf product, no hand-off after week one.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-card reveal reveal-delay-1">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                <path d="M3 13h4l3-6 4 12 3-6h6" stroke="url(#svc-g1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs><linearGradient id="svc-g1" x1="3" y1="13" x2="23" y2="13" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Workflow Automation</h3>
+            <p class="service-card__text">We sit with your team, walk through the process step by step, and build automation that replaces the manual parts — not a generic tool bolted on top of what you already have.</p>
+            <ul class="service-card__list">
+              <li>Process mapping &amp; bottleneck analysis</li>
+              <li>Trigger-based multi-step automation</li>
+              <li>Workflows that span multiple tools</li>
+            </ul>
+          </div>
+
+          <div class="service-card reveal reveal-delay-2">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                <rect x="3" y="3" width="8" height="8" rx="2" stroke="url(#svc-g2)" stroke-width="1.8"/>
+                <rect x="15" y="3" width="8" height="8" rx="2" stroke="url(#svc-g2)" stroke-width="1.8"/>
+                <rect x="3" y="15" width="8" height="8" rx="2" stroke="url(#svc-g2)" stroke-width="1.8"/>
+                <rect x="15" y="15" width="8" height="8" rx="2" stroke="url(#svc-g2)" stroke-width="1.8"/>
+                <defs><linearGradient id="svc-g2" x1="3" y1="3" x2="23" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+              </svg>
+            </div>
+            <h3 class="service-card__title">AI Data Processing</h3>
+            <p class="service-card__text">An invoice arrives as a PDF email. Instead of someone reading it and typing numbers into a spreadsheet, your workflow reads it, validates it, and routes the data — automatically, every time.</p>
+            <ul class="service-card__list">
+              <li>Extraction from PDFs, emails, and forms</li>
+              <li>Data routing &amp; transformation pipelines</li>
+              <li>Alerts when something looks wrong</li>
+            </ul>
+          </div>
+
+          <div class="service-card reveal reveal-delay-3">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                <circle cx="13" cy="13" r="9" stroke="url(#svc-g3)" stroke-width="1.8"/>
+                <circle cx="13" cy="13" r="3.5" fill="url(#svc-g3)" fill-opacity="0.25"/>
+                <path d="M13 4v3M13 19v3M4 13h3M19 13h3" stroke="url(#svc-g3)" stroke-width="1.8" stroke-linecap="round"/>
+                <defs><linearGradient id="svc-g3" x1="4" y1="4" x2="22" y2="22" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Custom AI Agents</h3>
+            <p class="service-card__text">An AI that answers questions, qualifies inbound leads, or processes requests the same way your best person would — except it runs at 3am and doesn't need to be caught up on Monday morning.</p>
+            <ul class="service-card__list">
+              <li>Trained on your actual content and processes</li>
+              <li>Hands off to a human when it can't resolve</li>
+              <li>Gets better as it handles more real cases</li>
+            </ul>
+          </div>
+
+          <div class="service-card reveal reveal-delay-4">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+                <circle cx="13" cy="13" r="4" stroke="url(#svc-g4)" stroke-width="1.8"/>
+                <path d="M13 3v4M13 19v4M3 13h4M19 13h4M6.5 6.5l2.8 2.8M16.8 16.8l2.8 2.8M19.5 6.5l-2.8 2.8M9.2 16.8l-2.8 2.8" stroke="url(#svc-g4)" stroke-width="1.8" stroke-linecap="round"/>
+                <defs><linearGradient id="svc-g4" x1="3" y1="3" x2="23" y2="23" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Integration Architecture</h3>
+            <p class="service-card__text">Your CRM doesn't talk to your billing tool. Your support desk doesn't know what's in your ERP. We fix the gap — building the connections your tools were supposed to have out of the box.</p>
+            <ul class="service-card__list">
+              <li>API design, integration &amp; maintenance</li>
+              <li>Real-time event triggers across your stack</li>
+              <li>Data sync without manual exports</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="process-section section" id="process" aria-labelledby="process-heading">
+      <div class="container">
+        <div class="section-header center reveal">
+          <span class="section-label">How It Works</span>
+          <h2 class="section-heading" id="process-heading">
+            What working together<br />
+            <span class="gradient-text">actually looks like</span>
+          </h2>
+          <p class="section-sub">We've done this enough times to know what breaks. Here's how we keep that from happening on your project.</p>
+        </div>
+
+        <div class="process-steps">
+          <div class="process-step reveal reveal-delay-1">
+            <div class="process-step__num" aria-hidden="true">01</div>
+            <h3 class="process-step__title">Discover</h3>
+            <p class="process-step__text">We walk through your current process with whoever actually does the work — not just management. Usually this surfaces three or four problems nobody's written down, and a clear picture of what to automate first.</p>
+            <ul class="process-step__details">
+              <li>Free 30-min strategy call</li>
+              <li>End-to-end workflow audit</li>
+              <li>ROI opportunity report</li>
+            </ul>
+          </div>
+
+          <div class="process-arrow" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M4 16h24M20 8l8 8-8 8" stroke="url(#arrow-g)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="arrow-g" x1="4" y1="16" x2="28" y2="16" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1" stop-opacity="0.4"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0.6"/></linearGradient></defs>
+            </svg>
+          </div>
+
+          <div class="process-step reveal reveal-delay-2">
+            <div class="process-step__num" aria-hidden="true">02</div>
+            <h3 class="process-step__title">Design</h3>
+            <p class="process-step__text">Before we write a line of code, we decide exactly what it needs to do — including the edge cases, the failure modes, and the parts that look simple but aren't. This is where most automation projects go wrong, so we take it seriously.</p>
+            <ul class="process-step__details">
+              <li>Custom solution architecture</li>
+              <li>Integration &amp; tooling plan</li>
+              <li>Precise delivery timeline</li>
+            </ul>
+          </div>
+
+          <div class="process-arrow" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M4 16h24M20 8l8 8-8 8" stroke="url(#arrow-g2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs><linearGradient id="arrow-g2" x1="4" y1="16" x2="28" y2="16" gradientUnits="userSpaceOnUse"><stop stop-color="#6366f1" stop-opacity="0.4"/><stop offset="1" stop-color="#8b5cf6" stop-opacity="0.6"/></linearGradient></defs>
+            </svg>
+          </div>
+
+          <div class="process-step reveal reveal-delay-3">
+            <div class="process-step__num" aria-hidden="true">03</div>
+            <h3 class="process-step__title">Deploy</h3>
+            <p class="process-step__text">We build it, test it with real data, and train whoever needs to use it. Most teams are running their first automated workflow within a week of handoff. We stay on for 30 days to catch anything that behaves differently in the wild.</p>
+            <ul class="process-step__details">
+              <li>Hands-on implementation</li>
+              <li>Team training included</li>
+              <li>30-day post-launch support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RESULTS ===== -->
+    <section class="results-section section" id="results" aria-labelledby="results-heading">
+      <div class="container">
+        <div class="section-header center reveal">
+          <span class="section-label">Results</span>
+          <h2 class="section-heading" id="results-heading">
+            Numbers from<br />
+            <span class="gradient-text">actual client projects</span>
+          </h2>
+        </div>
+
+        <div class="metrics-strip reveal">
+          <div class="metric">
+            <span class="metric__num">~12 hrs</span>
+            <span class="metric__label">Saved per person, per week</span>
+          </div>
+          <div class="metric">
+            <span class="metric__num">3 wks</span>
+            <span class="metric__label">Avg. time from kickoff to live</span>
+          </div>
+          <div class="metric">
+            <span class="metric__num">4–6 wk</span>
+            <span class="metric__label">Typical payback period</span>
+          </div>
+          <div class="metric">
+            <span class="metric__num">30 days</span>
+            <span class="metric__label">Post-launch support, included</span>
+          </div>
+        </div>
+
+        <div class="testimonials-grid">
+          <figure class="testimonial reveal reveal-delay-1">
+            <blockquote>
+              <p class="testimonial__text">"Before this, my team spent every morning manually entering invoice data — about 4 hours of work nobody wanted and everyone made mistakes on. Now it just runs. I genuinely don't think about it anymore."</p>
+            </blockquote>
+            <figcaption class="testimonial__author">
+              <img class="testimonial__avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="" aria-hidden="true" loading="lazy" width="44" height="44" />
+              <div>
+                <strong>Sarah Mitchell</strong>
+                <span>CFO, TechFlow Solutions</span>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial reveal reveal-delay-2">
+            <blockquote>
+              <p class="testimonial__text">"The volume we were handling manually just wasn't sustainable. Now the agent takes care of the routine stuff, and my team only gets pulled in when something actually needs a person. That's how it should've been from the start."</p>
+            </blockquote>
+            <figcaption class="testimonial__author">
+              <img class="testimonial__avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="" aria-hidden="true" loading="lazy" width="44" height="44" />
+              <div>
+                <strong>James Kowalski</strong>
+                <span>COO, Nexus Labs</span>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial reveal reveal-delay-3">
+            <blockquote>
+              <p class="testimonial__text">"We were about to hire two more people just to keep up with order volume. After the automation went live, we cancelled both of those hires. The people we already had finally had time to do their actual jobs."</p>
+            </blockquote>
+            <figcaption class="testimonial__author">
+              <img class="testimonial__avatar" src="https://randomuser.me/api/portraits/women/63.jpg" alt="" aria-hidden="true" loading="lazy" width="44" height="44" />
+              <div>
+                <strong>Maria Luevano</strong>
+                <span>Founder, Crestline Commerce</span>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section section" id="faq" aria-labelledby="faq-heading">
+      <div class="container faq-container">
+        <div class="section-header reveal">
+          <span class="section-label">FAQ</span>
+          <h2 class="section-heading" id="faq-heading">
+            Questions we get on<br />
+            <span class="gradient-text">every discovery call</span>
+          </h2>
+          <p class="section-sub">Still curious? Book a call and ask us directly — we'd rather you came in informed than surprised.</p>
+        </div>
+
+        <div class="faq-list reveal reveal-delay-1">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How long does implementation take?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Most projects go live in 2–6 weeks depending on complexity. Simple automations often deploy in under two weeks. After the discovery call, we'll give you an accurate timeline — and we stick to it.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Do we need technical expertise on our end?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>No. We handle everything technical — architecture, implementation, testing, and deployment. You bring domain knowledge about your business; we bring the engineering. Our handoff includes full documentation and team training so you can manage the system confidently.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What tools and platforms do you integrate with?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>We work with the tools you already use — Salesforce, HubSpot, Notion, Airtable, Slack, Google Workspace, QuickBooks, Shopify, and hundreds more. If a tool has an API or webhook, we can connect it. Custom internal software is not a problem either.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How do you handle data security and privacy?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Security is built into every system we design. All connections are encrypted in transit and at rest. We follow least-privilege access principles and work within your existing security policies. NDAs and compliance reviews are standard parts of our process — not exceptions.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What happens after we go live?
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="faq-answer" hidden>
+              <p>Every project includes 30 days of post-launch support. We monitor performance, fix any issues, and refine based on real-world usage. After that, you choose: a flexible maintenance retainer, or full ownership handoff to your team — complete with documentation and training.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section section" id="contact" aria-labelledby="cta-heading">
+      <div class="cta-bg" aria-hidden="true">
+        <div class="orb orb--cta-1"></div>
+        <div class="orb orb--cta-2"></div>
+      </div>
+      <div class="container">
+        <div class="cta-inner reveal">
+          <span class="section-label">Get Started</span>
+          <h2 class="cta-heading" id="cta-heading">
+            Tell us what's slowing<br />
+            <span class="gradient-text">your team down</span>
+          </h2>
+          <p class="cta-sub">Book a free 30-minute call. We'll tell you honestly whether what you're describing is automatable, what it would take, and whether it's worth it. We talk to about 50 teams a month — we only take on projects we think will work.</p>
+
+          <form class="cta-form" id="contact-form" novalidate aria-label="Book a free consultation">
+            <div id="form-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name" class="form-label">Full name <span class="form-req" aria-hidden="true">*</span></label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="Alex Johnson" autocomplete="name" required aria-required="true" aria-describedby="name-error" />
+                <span id="name-error" class="form-error" hidden>Please enter your full name.</span>
+              </div>
+              <div class="form-group">
+                <label for="email" class="form-label">Work email <span class="form-req" aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="alex@company.com" autocomplete="email" required aria-required="true" aria-describedby="email-error" />
+                <span id="email-error" class="form-error" hidden>Please enter a valid work email.</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="company" class="form-label">Company name <span class="form-req" aria-hidden="true">*</span></label>
+              <input type="text" id="company" name="company" class="form-input" placeholder="Your company" autocomplete="organization" required aria-required="true" aria-describedby="company-error" />
+              <span id="company-error" class="form-error" hidden>Please enter your company name.</span>
+            </div>
+            <div class="form-group">
+              <label for="challenge" class="form-label">
+                Biggest workflow challenge
+                <span class="form-optional">(optional)</span>
+              </label>
+              <textarea id="challenge" name="challenge" class="form-input form-textarea" placeholder="Describe the process you'd most like to automate…" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--lg btn--full" id="submit-btn">
+              Book My Free Strategy Call
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <p class="form-note">30 minutes. We'll tell you if it's worth pursuing — even if that answer is no.</p>
+          </form>
+
+          <div class="cta-trust">
+            <div class="trust-item">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                <path d="M7.5 1.5l1.7 3.4 3.8.55-2.75 2.68.65 3.77L7.5 10.15l-3.4 1.79.65-3.77L2 5.45l3.8-.55L7.5 1.5z" stroke="#10b981" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+              <span>200+ workflows in production</span>
+            </div>
+            <div class="trust-item">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                <path d="M7.5 1.5l1.7 3.4 3.8.55-2.75 2.68.65 3.77L7.5 10.15l-3.4 1.79.65-3.77L2 5.45l3.8-.55L7.5 1.5z" stroke="#10b981" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+              <span>3-week avg. time to live</span>
+            </div>
+            <div class="trust-item">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+                <path d="M7.5 1.5l1.7 3.4 3.8.55-2.75 2.68.65 3.77L7.5 10.15l-3.4 1.79.65-3.77L2 5.45l3.8-.55L7.5 1.5z" stroke="#10b981" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+              <span>Timeline agreed before we start</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="footer__logo" aria-label="FlowForge AI — home">
+          <svg width="28" height="28" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+            <rect width="30" height="30" rx="8" fill="url(#logo-gf)" />
+            <path d="M7 15h4.5l2-5 3 10 2.5-5H26" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="logo-gf" x1="0" y1="0" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span>FlowForge AI</span>
+        </a>
+        <p class="footer__tagline">We build automation that actually runs in production — not demos that look good in a pitch.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Footer navigation">
+        <div class="footer__nav-col">
+          <span class="footer__nav-heading">Company</span>
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#results">Results</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer__nav-col">
+          <span class="footer__nav-heading">Connect</span>
+          <a href="#contact">Book a call</a>
+          <a href="mailto:hello@flowforgeai.com">hello@flowforgeai.com</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; 2025 FlowForge AI. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
