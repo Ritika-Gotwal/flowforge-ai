@@ -10,36 +10,39 @@
 
 :root {
   /* Backgrounds */
-  --bg:           #07070f;
-  --bg-surface:   #0d0d1a;
-  --bg-card:      #111120;
-  --bg-card-hover:#16162a;
+  --bg:           #121316;
+  --bg-surface:   #17181C;
+  --bg-card:      #1C1D22;
+  --bg-card-hover:#212227;
+  --bg-glass:     18, 19, 22; /* rgb triplet for translucent glass surfaces */
 
   /* Borders */
-  --border:       rgba(255, 255, 255, 0.06);
-  --border-med:   rgba(255, 255, 255, 0.10);
-  --border-accent:rgba(85, 88, 234, 0.25);
+  --border:       rgba(255, 255, 255, 0.07);
+  --border-med:   rgba(255, 255, 255, 0.12);
+  --border-accent:rgba(26, 99, 196, 0.28);
 
-  /* Accent system */
-  --accent:       #5558ea; /* darkened from #6366f1 — white text now 5.3:1 on btn-primary */
-  --accent-light: #818cf8;
-  --accent-muted: rgba(85, 88, 234, 0.12);
-  --accent-glow:  rgba(85, 88, 234, 0.22);
-  --gradient:     linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  --gradient-text:linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 45%, #a5b4fc 100%);
-  --gradient-text-soft: linear-gradient(135deg, var(--accent-light) 0%, #c7d2fe 100%);
+  /* Accent system — Dark Navy + Sky Blue */
+  --accent:       #154F9D; /* fill-only — white text ~8:1, deep enough to read clearly at a glance */
+  --accent-hover: #113F7E; /* darken on hover/active, never brighten — keeps contrast margin */
+  --accent-light: #5B9EF2; /* safe for text/links/icons on --bg — ~6.7:1 */
+  --accent-muted: rgba(26, 99, 196, 0.12);
+  --accent-glow:  rgba(26, 99, 196, 0.22);
+  --accent-rose:  #7C93C4; /* muted slate-blue tertiary accent (replaces the old violet/rose) */
+  --gradient:     linear-gradient(135deg, #1A63C4 0%, #0F1F3D 100%);
+  --gradient-text:linear-gradient(135deg, #ffffff 0%, #BFE0FF 45%, #7EB6FF 100%);
+  --gradient-text-soft: linear-gradient(135deg, #7EB6FF 0%, #DCEEFF 100%);
 
   /* Success */
   --success:      #10b981;
   --success-muted:rgba(16, 185, 129, 0.14);
 
   /* Text */
-  --text:         #f1f5f9;
-  --text-dim:     #94a3b8;
-  --text-dimmer:  #7a8a9e; /* raised from #475569 — meets 4.5:1 on darkest surface */
+  --text:         #FFFFFF;
+  --text-dim:     #A3A7AE;
+  --text-dimmer:  #878B93; /* verified ~4.9:1 on --bg-card, the tightest surface it appears on */
 
   /* Typography */
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 
   /* Layout */
   --nav-h:      80px;
@@ -65,6 +68,8 @@
 /* ---- Reset ---- */
 html {
   font-size: 16px;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -112,24 +117,12 @@ figure { margin: 0; }
 .section-label {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--accent-light);
   margin-bottom: 16px;
-}
-
-.section-label::before {
-  content: '';
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent);
-  flex-shrink: 0;
 }
 
 .section-heading {
@@ -142,7 +135,7 @@ figure { margin: 0; }
 
 .section-sub {
   font-size: clamp(0.95rem, 1.4vw, 1.08rem);
-  color: var(--text-dim);
+  color: var(--text);
   line-height: 1.8;
   max-width: 540px;
   width: 100%;
@@ -168,8 +161,13 @@ figure { margin: 0; }
 /* ---- Mobile heading line-break control ---- */
 @media (max-width: 480px) {
   .section-heading br { display: none; }
-  .hero__heading br   { display: none; }
   .cta-heading br     { display: none; }
+}
+
+/* Hero heading drops its forced break as soon as the layout goes
+   single-column, so it never double-wraps both halves at once. */
+@media (max-width: 920px) {
+  .hero__heading br { display: none; }
 }
 
 /* ---- Scroll reveal ---- */
