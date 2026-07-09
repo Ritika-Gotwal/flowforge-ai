@@ -1,5 +1,5 @@
 /* =========================================
-   COMPONENTS — Buttons, Badge, Cards, Form
+   COMPONENTS — Buttons, Badges, Cards, Form
    ========================================= */
 
 /* ---- Buttons ---- */
@@ -8,75 +8,61 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 22px;
+  padding: 12px 24px;
   border-radius: var(--r);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.9375rem;
+  font-weight: 500;
   letter-spacing: -0.01em;
-  transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), background var(--t), color var(--t), border-color var(--t);
+  transition: transform var(--t), background var(--t), border-color var(--t), color var(--t);
   white-space: nowrap;
-  border: 1.5px solid transparent;
+  border: 1px solid transparent;
   line-height: 1;
 }
 
-.btn:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
 .btn--primary {
-  background: var(--accent);
+  background: var(--ink);
   color: #fff;
-  backdrop-filter: blur(12px) saturate(160%);
-  -webkit-backdrop-filter: blur(12px) saturate(160%);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 1px 3px rgba(0, 0, 0, 0.3),
-    0 4px 24px rgba(26, 99, 196, 0.35);
 }
 
 .btn--primary:hover {
-  background: var(--accent-hover);
+  background: var(--ink-hover);
   transform: translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 4px 12px rgba(0, 0, 0, 0.25),
-    0 8px 36px rgba(26, 99, 196, 0.45);
 }
 
 .btn--primary:active {
   transform: translateY(0);
-  background: var(--accent-hover);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.3),
-    0 2px 16px rgba(26, 99, 196, 0.30);
 }
 
-.btn--ghost {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
+.btn--secondary {
+  background: var(--surface-card);
+  color: var(--ink);
+  border-color: var(--border);
 }
 
-.btn--ghost:hover {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.22);
+.btn--secondary:hover {
+  background: var(--secondary-hover);
+  border-color: var(--border-hover);
   transform: translateY(-1px);
 }
 
-.btn--ghost:active {
+.btn--secondary:active {
   transform: translateY(0);
 }
 
+/* Inverted button — used only in the final CTA band on ink background */
+.btn--inverted {
+  background: #FFFFFF;
+  color: var(--ink);
+}
+
+.btn--inverted:hover {
+  background: var(--secondary-hover);
+  transform: translateY(-1px);
+}
+
 .btn--lg {
-  padding: 14px 32px;
-  font-size: 0.95rem;
-  border-radius: var(--r-lg);
+  padding: 14px 28px;
+  font-size: 1rem;
 }
 
 .btn--full {
@@ -84,203 +70,37 @@
 }
 
 .btn:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
   transform: none !important;
 }
 
-/* ---- Shared glass card (problem/service/process/testimonial/diff cards) ---- */
+/* ---- Card ---- */
 .card {
-  background: rgba(var(--bg-glass), 0.5);
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: var(--surface-card);
+  border: 1px solid var(--border);
   border-radius: var(--r-xl);
-  transition: border-color var(--t), background var(--t), transform var(--t), box-shadow var(--t);
+  transition: border-color var(--t);
 }
 
-/* ---- Section intro (two-column text + supporting image, reused by
-   Problem/Why-Us/Services/CTA) ---- */
-.section-intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: clamp(32px, 5vw, 64px);
-  margin-bottom: clamp(48px, 6vw, 72px);
+.card:hover {
+  border-color: var(--border-hover);
 }
 
-.section-intro > * {
-  min-width: 0;
-}
-
-.section-intro--start {
-  align-items: start;
-}
-
-.section-intro__visual {
-  border-radius: var(--r-xl);
-  overflow: hidden;
-}
-
-.section-intro__visual img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-@media (max-width: 860px) {
-  .section-intro {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .section-intro .section-sub {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* ---- Trust row (hero FUD-reducers + bottom-CTA trust badges) ---- */
-.trust-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  flex-wrap: wrap;
-}
-
-.trust-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  color: var(--text-dimmer);
-}
-
-/* ---- Hero proof badge (glass seal above the hero image — deliberately
-   NOT button-styled: translucent fill + border, no solid accent fill,
-   no drop/glow shadow, sits flat rather than tilted) ---- */
-.hero-sticker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  max-width: 360px;
-  padding: 11px 18px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  color: var(--text-dim);
-  background: rgba(var(--bg-glass), 0.55);
-  border: 1.5px solid var(--border-accent);
-  border-radius: var(--r-lg);
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    0 8px 20px -12px rgba(0, 0, 0, 0.6);
-}
-
-.hero-sticker__icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  color: var(--accent-light);
-  background: var(--accent-muted);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.hero-sticker__count {
-  font-weight: 800;
-  color: var(--accent-light);
-}
-
-/* ---- Trust strip (hero — one cohesive reassurance line, deliberately
-   NOT button-styled: static, no per-item borders/shadows, no hover
-   affordance at all. Icon + label per clause inside a single soft
-   outer pill, sized to match the CTA button above it. ---- */
-.trust-badges {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  row-gap: 10px;
-  column-gap: 32px;
-  width: 92%;
-  padding: 14px 22px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-dim);
-  background: rgba(var(--bg-glass), 0.4);
-  border: 1px solid var(--border-med);
-  border-radius: 100px;
-}
-
-@media (max-width: 920px) {
-  .trust-badges { justify-content: center; }
-}
-
-.hero-trust-item {
+/* ---- Badge / pill ---- */
+.badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  white-space: nowrap;
+  padding: 8px 16px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 100px;
 }
 
-.hero-trust-item svg {
-  flex-shrink: 0;
-}
-
-.hero-trust-item--green svg { color: var(--success); }
-.hero-trust-item--blue svg { color: var(--accent-light); }
-.hero-trust-item--slate svg { color: var(--accent-rose); }
-
-/* ---- Hero illustration ---- */
-.illustration-card {
-  width: 100%;
-  max-width: 360px;
-  background: rgba(var(--bg-glass), 0.55);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border-radius: var(--r-xl);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 24px 60px -12px rgba(0, 0, 0, 0.55),
-    0 2px 8px rgba(0, 0, 0, 0.25),
-    0 0 60px var(--accent-glow);
-  overflow: hidden;
-}
-
-.illustration-card__art {
-  padding: 28px 24px 12px;
-}
-
-.illustration-card .hero__mini-stats {
-  width: 100%;
-  max-width: none;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border: none;
-  box-shadow: none;
-  border-top: 1px solid var(--border);
-  border-radius: 0;
-}
-
-.hero-illustration {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--r-lg);
-}
+.badge svg { flex-shrink: 0; }
 
 /* ---- Form ---- */
 .form-row {
@@ -296,50 +116,49 @@
 }
 
 .form-label {
-  font-size: 0.83rem;
+  font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--text);
+  color: var(--ink);
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .form-optional {
-  color: var(--text-dimmer);
+  color: var(--muted);
   font-weight: 400;
 }
 
 .form-req {
-  display: none; /* hidden by default; shown only when field has a validation error */
+  display: none;
 }
 
 .form-group--error .form-req {
   display: inline;
-  color: #fca5a5;
+  color: var(--ink);
   font-weight: 400;
   margin-left: 2px;
 }
 
 .form-input {
-  background: var(--bg-surface);
-  border: 1.5px solid var(--border-med);
+  background: var(--bg-page);
+  border: 1px solid var(--border);
   border-radius: var(--r);
   padding: 11px 14px;
-  color: var(--text);
-  font-size: 0.9rem;
-  transition: border-color var(--t), background var(--t), box-shadow var(--t);
+  color: var(--ink);
+  font-size: 0.9375rem;
+  transition: border-color var(--t), background var(--t);
   outline: none;
   width: 100%;
 }
 
 .form-input::placeholder {
-  color: var(--text-dimmer);
+  color: var(--muted);
 }
 
 .form-input:focus {
-  border-color: var(--accent);
-  background: var(--bg-card);
-  box-shadow: 0 0 0 3px var(--accent-muted);
+  border-color: var(--slate);
+  background: var(--surface-card);
 }
 
 .form-textarea {
@@ -348,8 +167,8 @@
 
 .form-note {
   text-align: center;
-  font-size: 0.78rem;
-  color: var(--text-dimmer);
+  font-size: 0.8125rem;
+  color: var(--muted);
   margin-top: -6px;
 }
 
@@ -357,4 +176,96 @@
   .form-row {
     grid-template-columns: 1fr;
   }
+}
+
+/* ---- Success modal ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(32, 33, 36, 0.5);
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: var(--surface-card);
+  border-radius: var(--r-xl);
+  padding: 32px 28px;
+  text-align: center;
+  box-shadow: 0 24px 48px rgba(32, 33, 36, 0.18);
+  animation: modal-in 200ms ease-out;
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal { animation: none; }
+}
+
+.modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--muted);
+  transition: background var(--t), color var(--t);
+}
+
+.modal__close:hover {
+  background: var(--badge-bg);
+  color: var(--ink);
+}
+
+.modal__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--badge-bg);
+  color: var(--success);
+}
+
+.modal__title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.modal__message {
+  font-size: 0.9375rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.modal__note {
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.modal__done {
+  width: 100%;
 }

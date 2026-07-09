@@ -1,5 +1,7 @@
 /* =========================================
-   BASE — Reset, Variables, Typography, Utils
+   BASE — Reset, Design Tokens, Typography
+   Mono slate system (60-30-10): zero hue, hierarchy
+   from value contrast, weight, and border texture.
    ========================================= */
 
 *, *::before, *::after {
@@ -9,63 +11,39 @@
 }
 
 :root {
-  /* Backgrounds */
-  --bg:           #121316;
-  --bg-surface:   #17181C;
-  --bg-card:      #1C1D22;
-  --bg-card-hover:#212227;
-  --bg-glass:     18, 19, 22; /* rgb triplet for translucent glass surfaces */
+  /* Mono slate palette — do not introduce any hue outside this list */
+  --bg-page:        #F7F7F8;
+  --ink:            #202124;
+  --ink-hover:      #131417;
+  --slate:          #5B5F6B;
+  --muted:          #8A8D95;
+  --logo-gray:      #9A9DA4;
+  --surface-card:   #FFFFFF;
+  --border:         #E2E2E5;
+  --border-hover:   #D8D8DC;
+  --border-dashed:  #C9C9CE;
+  --badge-bg:       #ECECEF;
+  --badge-text:     #43464E;
+  --divider-dark:   #35363B;
+  --secondary-hover:#F0F0F2;
+  --success:        #22C55E; /* intentional exception to the mono palette — rich, vibrant success accent */
+  --error:          #DC2626; /* intentional exception to the mono palette — form validation error accent */
 
-  /* Borders */
-  --border:       rgba(255, 255, 255, 0.07);
-  --border-med:   rgba(255, 255, 255, 0.12);
-  --border-accent:rgba(26, 99, 196, 0.28);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 
-  /* Accent system — Dark Navy + Sky Blue */
-  --accent:       #154F9D; /* fill-only — white text ~8:1, deep enough to read clearly at a glance */
-  --accent-hover: #113F7E; /* darken on hover/active, never brighten — keeps contrast margin */
-  --accent-light: #5B9EF2; /* safe for text/links/icons on --bg — ~6.7:1 */
-  --accent-muted: rgba(26, 99, 196, 0.12);
-  --accent-glow:  rgba(26, 99, 196, 0.22);
-  --accent-rose:  #7C93C4; /* muted slate-blue tertiary accent (replaces the old violet/rose) */
-  --gradient:     linear-gradient(135deg, #1A63C4 0%, #0F1F3D 100%);
-  --gradient-text:linear-gradient(135deg, #ffffff 0%, #BFE0FF 45%, #7EB6FF 100%);
-  --gradient-text-soft: linear-gradient(135deg, #7EB6FF 0%, #DCEEFF 100%);
+  --max-w: 1200px;
+  --pad: clamp(20px, 5vw, 48px);
 
-  /* Success */
-  --success:      #10b981;
-  --success-muted:rgba(16, 185, 129, 0.14);
+  --r-sm: 6px;
+  --r: 10px;
+  --r-lg: 12px;
+  --r-xl: 16px;
 
-  /* Text */
-  --text:         #FFFFFF;
-  --text-dim:     #A3A7AE;
-  --text-dimmer:  #878B93; /* verified ~4.9:1 on --bg-card, the tightest surface it appears on */
+  --shadow: 0 1px 2px rgba(32, 33, 36, 0.06);
 
-  /* Typography */
-  --font: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-
-  /* Layout */
-  --nav-h:      80px;
-  --max-w:      1200px;
-  --pad:        clamp(20px, 5vw, 48px);
-
-  /* Radii */
-  --r-sm:  6px;
-  --r:    10px;
-  --r-lg: 14px;
-  --r-xl: 20px;
-  --r-2xl:28px;
-
-  /* Shadows */
-  --shadow:       0 4px 24px rgba(0, 0, 0, 0.45);
-
-  /* Transitions */
-  --t:     0.2s ease;
-  --t-med: 0.35s ease;
-  --ease:  cubic-bezier(0.4, 0, 0.2, 1);
+  --t: 150ms ease;
 }
 
-/* ---- Reset ---- */
 html {
   font-size: 16px;
   max-width: 100%;
@@ -78,16 +56,16 @@ html {
 
 body {
   font-family: var(--font);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  font-weight: 400;
+  background: var(--bg-page);
+  color: var(--slate);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 img, svg { display: block; max-width: 100%; }
-a  { text-decoration: none; color: inherit; }
+a { text-decoration: none; color: inherit; }
 button { cursor: pointer; font: inherit; border: none; background: none; padding: 0; }
 ul, ol { list-style: none; }
 input, textarea { font: inherit; }
@@ -102,90 +80,76 @@ figure { margin: 0; }
 }
 
 .section {
-  padding: clamp(60px, 10vw, 140px) 0;
+  padding: 128px 0;
 }
 
-/* ---- Typography utilities ---- */
-.gradient-text {
-  background: var(--gradient-text);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
+@media (max-width: 768px) {
+  .section { padding: 64px 0; }
 }
 
-.section-label {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.13em;
+/* ---- Typography ---- */
+h1, h2, h3 {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.eyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent-light);
-  margin-bottom: 16px;
+  color: var(--muted);
+  margin-bottom: 12px;
 }
 
 .section-heading {
-  font-size: clamp(2rem, 4.5vw, 3rem);
-  font-weight: 800;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  margin-bottom: 18px;
+  font-size: 2.25rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .section-heading { font-size: 1.75rem; }
 }
 
 .section-sub {
-  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
-  color: var(--text);
-  line-height: 1.8;
-  max-width: 540px;
-  width: 100%;
+  font-size: 1.0625rem;
+  color: var(--slate);
+  line-height: 1.65;
+  max-width: 46ch;
 }
 
 .section-header {
-  margin-bottom: clamp(48px, 6vw, 72px);
+  margin-bottom: 56px;
 }
 
 .section-header.center {
   text-align: center;
 }
 
-.section-header.center .section-label {
+.section-header.center .section-sub {
   margin-left: auto;
   margin-right: auto;
 }
 
-.section-header.center .section-sub {
-  margin: 0 auto;
-}
-
-/* ---- Mobile heading line-break control ---- */
-@media (max-width: 480px) {
-  .section-heading br { display: none; }
-  .cta-heading br     { display: none; }
-}
-
-/* Hero heading drops its forced break as soon as the layout goes
-   single-column, so it never double-wraps both halves at once. */
-@media (max-width: 920px) {
-  .hero__heading br { display: none; }
+.microcopy {
+  font-size: 0.8125rem;
+  color: var(--muted);
 }
 
 /* ---- Scroll reveal ---- */
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
+  transform: translateY(12px);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
 }
 
 .reveal.visible {
   opacity: 1;
   transform: none;
 }
-
-.reveal-delay-1.visible { transition-delay: 0.1s; }
-.reveal-delay-2.visible { transition-delay: 0.2s; }
-.reveal-delay-3.visible { transition-delay: 0.3s; }
-.reveal-delay-4.visible { transition-delay: 0.4s; }
 
 /* ---- Screen-reader only ---- */
 .sr-only {
@@ -207,29 +171,37 @@ figure { margin: 0; }
   left: 12px;
   z-index: 9999;
   padding: 10px 20px;
-  background: var(--accent);
+  background: var(--ink);
   color: #fff;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 0 0 var(--r) var(--r);
   text-decoration: none;
-  transition: top 0.15s ease;
+  transition: top var(--t);
 }
 
 .skip-link:focus {
   top: 0;
-  outline: 3px solid #fff;
+  outline: 2px solid var(--slate);
   outline-offset: 2px;
+}
+
+/* ---- Focus rings (global) ---- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--slate);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 /* ---- Form validation error ---- */
 .form-error {
   font-size: 0.8rem;
-  color: #fca5a5;
+  color: var(--error);
   gap: 5px;
   margin-top: 2px;
-  /* display intentionally omitted — [hidden] attribute controls visibility.
-     flex is applied only once hidden is removed, via :not([hidden]) below. */
 }
 
 .form-error:not([hidden]) {
@@ -238,8 +210,7 @@ figure { margin: 0; }
 }
 
 .form-input.is-error {
-  border-color: #f87171;
-  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15);
+  border-color: var(--error);
 }
 
 /* ---- Reduced motion ---- */
@@ -252,7 +223,6 @@ figure { margin: 0; }
     transition-duration: 0.01ms !important;
   }
 
-  /* Show reveal elements immediately — no fade-in */
   .reveal {
     opacity: 1;
     transform: none;
