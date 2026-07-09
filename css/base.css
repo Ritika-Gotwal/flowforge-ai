@@ -47,14 +47,18 @@
 html {
   font-size: 16px;
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
 
+/* overflow-x lives on body, not html — mobile Safari fails to propagate
+   overflow set on the root element back to the viewport, which silently
+   breaks position: sticky on descendants (e.g. the nav) on real devices. */
 body {
+  position: relative;
+  overflow-x: hidden;
   font-family: var(--font);
   font-weight: 400;
   background: var(--bg-page);

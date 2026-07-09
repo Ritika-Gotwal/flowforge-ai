@@ -75,12 +75,9 @@
      starts as soon as the top of the screen scrolls into view rather
      than waiting for the whole laptop to be on screen. It replays
      every time the screen re-enters the viewport (class is removed
-     on exit), rather than firing once and staying done.
-
-     It's also gated behind the user's first scroll/keydown: on load
-     the frame can already be intersecting (it's near the top of the
-     page), which would otherwise play the sequence before the user
-     has scrolled far enough to actually be looking at it. */
+     on exit), rather than firing once and staying done. Since the
+     frame is near the top of the page, this typically plays right on
+     load. */
   var heroVisual = document.querySelector('.hero-visual');
   var heroVisualFrame = document.querySelector('.hero-visual__frame');
 
@@ -93,8 +90,6 @@
          must not cut the sequence off before this elapses. */
       var SEQUENCE_MS = 1700;
 
-      var hasScrolled = false;
-      var isCurrentlyIntersecting = false;
       var exitTimer = null;
 
       var showSequence = function () {
@@ -112,8 +107,6 @@
 
       var sequenceObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
-          isCurrentlyIntersecting = entry.isIntersecting;
-          if (!hasScrolled) { return; }
           if (entry.isIntersecting) {
             showSequence();
           } else {
@@ -123,24 +116,6 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
       sequenceObserver.observe(heroVisualFrame);
-
-      var markScrolled = function () {
-        hasScrolled = true;
-        if (isCurrentlyIntersecting) { showSequence(); }
-        window.removeEventListener('scroll', onFirstScroll);
-        window.removeEventListener('keydown', onFirstKeydown);
-      };
-
-      var onFirstScroll = function () { markScrolled(); };
-
-      var onFirstKeydown = function (e) {
-        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
-          markScrolled();
-        }
-      };
-
-      window.addEventListener('scroll', onFirstScroll, { passive: true });
-      window.addEventListener('keydown', onFirstKeydown);
     } else {
       heroVisual.classList.add('hero-visual--in-view');
     }
@@ -188,19 +163,87 @@
     }
   }
 
-  /* ---------- Testimonials marquee: duplicate each row for a seamless loop ----------
-     Authored once in HTML (real, readable content); doubled here so the
-     CSS animation's translateX(-50%) loops back to an identical position. */
-  var marqueeRows = document.querySelectorAll('[data-marquee-row]');
+  /* ---------- Horizontal drag-to-scroll rows (testimonials + logo bar) ---------- */
+  var dragScrollRows = document.querySelectorAll('.testimonials-row, .logo-bar__row');
 
-  marqueeRows.forEach(function (row) {
-    var clone = row.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    Array.prototype.forEach.call(clone.querySelectorAll('[id]'), function (el) {
-      el.removeAttribute('id');
+  dragScrollRows.forEach(function (row) {
+    var isDown = false;
+    var moved = false;
+    var startX = 0;
+    var startScrollLeft = 0;
+
+    function endDrag() {
+      if (!isDown) { return; }
+      isDown = false;
+      row.classList.remove('is-dragging');
+    }
+
+    row.addEventListener('mousedown', function (e) {
+      isDown = true;
+      moved = false;
+      startX = e.pageX;
+      startScrollLeft = row.scrollLeft;
+      row.classList.add('is-dragging');
     });
-    row.appendChild(clone);
+
+    row.addEventListener('mousemove', function (e) {
+      if (!isDown) { return; }
+      var dx = e.pageX - startX;
+      if (Math.abs(dx) > 3) { moved = true; }
+      row.scrollLeft = startScrollLeft - dx;
+      e.preventDefault();
+    });
+
+    row.addEventListener('mouseup', endDrag);
+    row.addEventListener('mouseleave', endDrag);
+
+    row.addEventListener('dragstart', function (e) {
+      e.preventDefault();
+    });
+
+    /* Suppress the click that follows a drag so it doesn't act like a tap */
+    row.addEventListener('click', function (e) {
+      if (moved) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
   });
+
+  /* ---------- Logo bar: prev/next arrows ----------
+     Step the row one item at a time in either direction. Each arrow
+     hides itself when there's nothing left that way to scroll to. */
+  var logoBarRow = document.querySelector('.logo-bar__row');
+  var logoBarNext = document.querySelector('[data-logo-row-next]');
+  var logoBarPrev = document.querySelector('[data-logo-row-prev]');
+
+  if (logoBarRow && logoBarNext && logoBarPrev) {
+    var logoBarStep = function () {
+      var item = logoBarRow.querySelector('.logo-bar__item');
+      var itemWidth = item ? item.getBoundingClientRect().width : logoBarRow.clientWidth * 0.85;
+      var gap = parseFloat(window.getComputedStyle(logoBarRow).columnGap) || 24;
+      return itemWidth + gap;
+    };
+
+    var updateLogoBarArrows = function () {
+      var atStart = logoBarRow.scrollLeft <= 2;
+      var atEnd = logoBarRow.scrollLeft + logoBarRow.clientWidth >= logoBarRow.scrollWidth - 2;
+      logoBarPrev.hidden = atStart;
+      logoBarNext.hidden = atEnd;
+    };
+
+    logoBarNext.addEventListener('click', function () {
+      logoBarRow.scrollBy({ left: logoBarStep(), behavior: 'smooth' });
+    });
+
+    logoBarPrev.addEventListener('click', function () {
+      logoBarRow.scrollBy({ left: -logoBarStep(), behavior: 'smooth' });
+    });
+
+    logoBarRow.addEventListener('scroll', updateLogoBarArrows, { passive: true });
+    window.addEventListener('resize', updateLogoBarArrows);
+    updateLogoBarArrows();
+  }
 
   /* ---------- FAQ accordion ---------- */
   var faqQuestions = document.querySelectorAll('.faq-question');

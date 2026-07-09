@@ -103,11 +103,17 @@
 
 .nav__mobile {
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
   flex-direction: column;
   gap: 2px;
   padding: 12px var(--pad) 20px;
   background: var(--bg-page);
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 12px 24px rgba(32, 33, 36, 0.1);
 }
 
 .nav__mobile.open {
@@ -127,15 +133,18 @@
   background: var(--badge-bg);
 }
 
-.nav__mobile .btn {
-  margin-top: 8px;
-  justify-content: center;
-}
-
 @media (max-width: 768px) {
   .nav__links   { display: none; }
-  .nav__toggle  { display: flex; margin-left: 8px; flex-shrink: 0; }
-  .nav__inner   { display: flex; gap: 0; }
+  .nav__inner   { display: flex; align-items: center; gap: 0; }
+
+  /* DOM order already puts the toggle first, then logo, then actions —
+     visual order and keyboard tab order stay in sync. */
+  .nav__toggle {
+    display: flex;
+    margin-left: 0;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
 
   .nav__logo {
     flex-shrink: 1;
@@ -153,6 +162,11 @@
     display: flex;
     flex-shrink: 0;
     margin-left: auto;
+  }
+
+  .nav__actions .btn {
+    padding: 8px 14px;
+    font-size: 0.8125rem;
   }
 }
 
@@ -172,7 +186,7 @@
 
 @media (max-width: 768px) {
   .hero__first-screen {
-    min-height: calc(100vh - 72px);
+    min-height: auto;
   }
 }
 
@@ -180,6 +194,13 @@
   width: 100%;
   padding-top: 32px;
   padding-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .hero__intro {
+    padding-top: 36px;
+    padding-bottom: 20px;
+  }
 }
 
 /* ---- Hero decorative illustrations (wide screens only) ----
@@ -325,11 +346,11 @@
 
 .logo-bar__rating {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 40px;
 }
 
@@ -342,37 +363,139 @@
   --star-shadow: oklch(0.6 0.16 55);
 
   display: inline-flex;
-  gap: 3px;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  /* Sized off the rating line's own font-size instead of a fixed pixel
+     value, so the stars scale with the text around them. */
+  font-size: 1rem;
+}
+
+.logo-bar__stars svg {
+  width: 1em;
+  height: 1em;
 }
 
 .logo-bar__rating-text {
-  font-size: 1.125rem;
+  font-size: 0.9375rem;
   font-weight: 500;
   color: var(--slate);
+  white-space: nowrap;
 }
 
 .logo-bar__rating-number {
-  font-size: 1.625rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.01em;
-  margin-right: 10px;
+}
+
+@media (max-width: 480px) {
+  .logo-bar__stars {
+    font-size: 0.8125rem;
+  }
+
+  .logo-bar__rating-text {
+    font-size: 0.75rem;
+  }
+
+  .logo-bar__rating-number {
+    font-size: 0.875rem;
+  }
+}
+
+/* One item at a time, drag/scroll-snapped, with a deliberate peek of
+   the next item at the edge so it reads as scrollable rather than a
+   static row cut off mid-grid. */
+.logo-bar__row-wrap {
+  position: relative;
+}
+
+.logo-bar__row-wrap::after,
+.logo-bar__row-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(48px, 10vw, 96px);
+  pointer-events: none;
+}
+
+.logo-bar__row-wrap::after {
+  right: 0;
+  background: linear-gradient(to right, transparent, var(--badge-bg) 65%);
+}
+
+.logo-bar__row-wrap::before {
+  left: 0;
+  z-index: 1;
+  background: linear-gradient(to left, transparent, var(--badge-bg) 65%);
+}
+
+.logo-bar__row-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  transition: border-color var(--t), background var(--t), opacity var(--t);
+}
+
+.logo-bar__row-arrow--next {
+  right: clamp(4px, 2vw, 16px);
+}
+
+.logo-bar__row-arrow--prev {
+  left: clamp(4px, 2vw, 16px);
+}
+
+.logo-bar__row-arrow:hover {
+  border-color: var(--border-hover);
+  background: var(--secondary-hover);
+}
+
+.logo-bar__row-arrow[hidden] {
+  display: none;
 }
 
 .logo-bar__row {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  align-items: start;
-  gap: 40px 44px;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px var(--pad) 8px;
   max-width: none;
+  cursor: grab;
+  scrollbar-width: none;
+}
+
+.logo-bar__row::-webkit-scrollbar {
+  display: none;
+}
+
+.logo-bar__row.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
 }
 
 .logo-bar__item {
+  flex: 0 0 min(360px, 85%);
+  scroll-snap-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  min-width: 0;
   text-align: center;
 }
 
@@ -401,12 +524,7 @@
 
 @media (max-width: 768px) {
   .logo-bar { margin: 64px 0 0; padding: 40px 0; }
-  .logo-bar__row { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
   .logo-bar__brand { font-size: 1rem; }
-}
-
-@media (max-width: 480px) {
-  .logo-bar__row { grid-template-columns: 1fr; }
 }
 
 /* ---- Hero visual: before/after card ---- */
@@ -436,7 +554,7 @@
 }
 
 .hero-visual__neck {
-  width: clamp(110px, 13vw, 160px);
+  width: clamp(70px, 8vw, 100px);
   height: 88px;
   margin: 0 auto;
   background: var(--ink);
@@ -516,6 +634,32 @@
   color: var(--slate);
 }
 
+/* Intentional exception to the mono slate palette, same as --success and
+   the hero-deco accents: each "before" chip gets a semantic icon color
+   (communication, finance, data, sync) instead of the flat slate tone. */
+.hero-visual__chips {
+  --chip-blue: oklch(0.58 0.22 250);
+  --chip-orange: oklch(0.55 0.22 40);
+  --chip-teal: oklch(0.6 0.19 195);
+  --chip-green: oklch(0.62 0.2 145);
+}
+
+.hero-chip--mail svg {
+  color: var(--chip-blue);
+}
+
+.hero-chip--invoice svg {
+  color: var(--chip-orange);
+}
+
+.hero-chip--data svg {
+  color: var(--chip-teal);
+}
+
+.hero-chip--sync svg {
+  color: var(--chip-green);
+}
+
 .hero-visual__arrow {
   display: flex;
   align-items: center;
@@ -574,19 +718,71 @@
   color: #fff;
 }
 
-@media (max-width: 768px) {
+/* ---- Hero visual: mobile-native layout ----
+   Not a shrunk clone of the desktop version — the "before" chips move
+   into a compact 2-column grid instead of a 4-row stack, and every
+   font/padding is tuned down a step so the whole mockup reads as a
+   proper, self-contained monitor instead of an exaggerated column. */
+@media (max-width: 640px) {
+  .hero-visual__card {
+    padding: 22px 18px 26px;
+  }
+
+  .hero-visual__header {
+    margin-bottom: 20px;
+  }
+
   .hero-visual__grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .hero-visual__before-label {
+    margin-bottom: 10px;
+  }
+
+  .hero-visual__chips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .hero-chip {
+    padding: 9px 10px;
+    gap: 6px;
+    font-size: 0.8125rem;
+  }
+
+  .hero-chip svg {
+    width: 14px;
+    height: 14px;
   }
 
   .hero-visual__arrow {
     transform: rotate(90deg);
-    padding: 4px 0;
+    padding: 2px 0;
+  }
+
+  .hero-visual__arrow svg {
+    width: 18px;
+    height: 18px;
   }
 
   .hero-visual__after {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 14px 16px;
+  }
+
+  .hero-visual__after-title {
+    font-size: 0.9375rem;
+  }
+
+  .hero-visual__after-sub {
+    font-size: 0.8125rem;
+  }
+
+  .hero-visual__check {
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -601,9 +797,19 @@
   padding: 0 var(--pad);
 }
 
-/* ---- Stats band reused as the hero-visual frame's base/foot ---- */
+/* ---- Stats band reused as the hero-visual frame's base/foot ----
+   Flattened into a keyboard-deck look: a trapezoid, narrower along
+   the top (the back edge, receding away) and full width along the
+   bottom (the front edge, closer to the viewer), with each stat
+   raised as its own embossed "key" popping off the deck. */
 .hero-visual__base {
-  border-radius: var(--r-xl);
+  clip-path: polygon(
+    7% 0%, 93% 0%,
+    98% 6%, 100% 94%,
+    97% 100%, 3% 100%,
+    0% 94%, 2% 6%
+  );
+  padding: 22px clamp(28px, 6vw, 52px);
 }
 
 .hero-visual__base .stats-band__inner {
@@ -616,6 +822,10 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.hero-visual__base .stats-band__grid {
+  gap: 14px;
+}
+
 .stat {
   padding: 32px 20px;
   text-align: center;
@@ -624,6 +834,17 @@
 
 .stat:first-child {
   border-left: none;
+}
+
+.hero-visual__base .stat {
+  border-left: none;
+  border-radius: var(--r-lg);
+  padding: 20px 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 -10px 14px -12px rgba(0, 0, 0, 0.6),
+    0 8px 16px -6px rgba(0, 0, 0, 0.45);
 }
 
 .stat__num {
@@ -652,6 +873,36 @@
 
   .stat:first-child {
     border-top: none;
+  }
+
+  .hero-visual__base .stat {
+    border-top: none;
+  }
+
+  /* The keyboard-deck stats stay a compact 3-across row here — stacking
+     them to one column is what made the base "exaggerated in height".
+     Fonts/padding step down instead so all three still read clearly. */
+  .hero-visual__base {
+    padding: 16px 18px;
+  }
+
+  .hero-visual__base .stats-band__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .hero-visual__base .stat {
+    padding: 12px 6px;
+  }
+
+  .hero-visual__base .stat__num {
+    font-size: 1.0625rem;
+    margin-bottom: 4px;
+  }
+
+  .hero-visual__base .stat__label {
+    font-size: 0.625rem;
+    line-height: 1.3;
   }
 }
 
@@ -852,78 +1103,98 @@
 }
 
 /* =========== RESULTS =========== */
-.testimonials-marquee {
+.testimonials-row-wrap {
+  /* Intentional exception to the mono slate palette, same as --success
+     and the hero-deco accents: a warm, glossy "liquid gold" requested
+     as-is for the star rating, not a flat/standard yellow. */
+  --star-highlight: oklch(0.9 0.11 95);
+  --star-gold: oklch(0.78 0.17 80);
+  --star-shadow: oklch(0.6 0.16 55);
+
   width: 100%;
   margin-top: 48px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  gap: 32px;
 }
 
-.testimonials-track {
+.testimonials-row {
   display: flex;
-  gap: 20px;
-  width: max-content;
-  animation: marquee-left 70s linear infinite;
+  gap: 40px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 4px var(--pad) 16px;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.testimonials-track--reverse {
-  animation-name: marquee-right;
+.testimonials-row::-webkit-scrollbar {
+  display: none;
 }
 
-.testimonials-track:hover,
-.testimonials-track:focus-within {
-  animation-play-state: paused;
-}
-
-@keyframes marquee-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@keyframes marquee-right {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .testimonials-track {
-    animation: none;
-  }
+.testimonials-row.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
 }
 
 .testimonial {
-  flex: 0 0 340px;
-  padding: 28px 26px;
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
   text-align: center;
+  gap: 10px;
+}
+
+.star-rating {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.star-rating__row {
+  display: flex;
+  gap: 3px;
+}
+
+.star-rating__row--fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.testimonial blockquote {
+  margin: 0;
 }
 
 .testimonial__text {
-  font-size: 1.0625rem;
+  font-size: 0.9375rem;
   color: var(--ink);
-  line-height: 1.6;
-  flex: 1;
+  line-height: 1.55;
 }
 
 .testimonial__author {
+  margin-top: auto;
+  padding-top: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .testimonial__avatar {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
+  -webkit-user-drag: none;
 }
 
 .testimonial__author strong {
@@ -941,8 +1212,17 @@
 }
 
 @media (max-width: 640px) {
+  .testimonials-row-wrap {
+    gap: 24px;
+  }
+
+  .testimonials-row {
+    gap: 24px;
+  }
+
   .testimonial {
-    flex-basis: 280px;
+    flex-basis: 260px;
+    padding: 20px 20px;
   }
 }
 
@@ -951,6 +1231,7 @@
   display: flex;
   flex-direction: column;
   max-width: 720px;
+  margin: 0 auto;
 }
 
 .faq-item {
@@ -1036,12 +1317,12 @@
 }
 
 .footer__inner {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 40px;
   padding-top: 48px;
   padding-bottom: 48px;
-  align-items: start;
 }
 
 .footer__logo {
@@ -1121,7 +1402,7 @@
 
 @media (max-width: 768px) {
   .footer__inner {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 32px;
   }
 
