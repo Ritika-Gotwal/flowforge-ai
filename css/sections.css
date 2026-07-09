@@ -290,6 +290,7 @@
   color: var(--ink);
   max-width: 850px;
   margin: 0 auto 24px;
+  text-wrap: balance;
 }
 
 .hero__sub {
@@ -332,6 +333,10 @@
 
 @media (max-width: 768px) {
   .hero__heading { font-size: 2.375rem; }
+}
+
+@media (max-width: 420px) {
+  .hero__heading { font-size: 1.875rem; }
 }
 
 /* ---- Logo bar: full-bleed trust strip beneath the hero ---- */
