@@ -44,21 +44,40 @@
   --t: 150ms ease;
 }
 
+/* overflow-x: clip (not hidden/auto/scroll) — it suppresses the root's
+   own scrollable overflow without turning html into a scroll container,
+   so it doesn't trigger the mobile Safari bug where position: sticky
+   descendants (e.g. the nav) break once html becomes scrollable.
+   Needed in addition to body's overflow-x: clip below because touch
+   panning on real devices reads the document root's overflow, not
+   body's — body alone can still leave the page horizontally pannable.
+   overflow-y must stay explicit 'visible' — per spec, pairing a
+   non-visible overflow-x with an implicit visible overflow-y forces
+   the y-axis to compute to 'auto', turning html into a vertical scroll
+   container too and breaking sticky all over again. */
 html {
   font-size: 16px;
   max-width: 100%;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
 
-/* overflow-x lives on body, not html — mobile Safari fails to propagate
-   overflow set on the root element back to the viewport, which silently
-   breaks position: sticky on descendants (e.g. the nav) on real devices. */
+/* overflow-x: clip here too (not hidden) — same reasoning as html above.
+   The visible -> auto promotion is only suppressed when the other axis is
+   'clip'; pairing overflow-x: hidden with overflow-y: visible still
+   triggers it. header.nav is a direct child of body, so if body gets
+   promoted to its own scroll container, body (not the viewport) becomes
+   the containing scrollport for the nav's position: sticky, breaking it —
+   most visibly on mobile, where the address bar's show/hide resizing
+   isn't tracked the same way inside a non-viewport scrollport. */
 body {
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   font-family: var(--font);
   font-weight: 400;
   background: var(--bg-page);

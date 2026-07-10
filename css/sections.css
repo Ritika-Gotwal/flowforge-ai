@@ -1361,6 +1361,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
 .footer__nav-heading {
@@ -1376,6 +1377,7 @@
   font-size: 0.875rem;
   color: var(--logo-gray);
   transition: color var(--t);
+  overflow-wrap: anywhere;
 }
 
 .footer__nav-col a:hover { color: var(--bg-page); }
